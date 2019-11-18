@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flag of USA</title>
+</head>
+<body>
+    <style>
+    #svg {
+        border: 1px solid #cfcfcf;
+        width: 500px;
+        height: 260px;
+    }
+    </style>
+
+    <div id="svg"></div>
+
+    <script>
+    "use strict";
+    var $ = function (foo) {
+        return document.getElementById(foo);
+    };
+
+    let xlmns = 'http://www.w3.org/2000/svg';
+
+    let SVG = {
+        init(svgId, viewbox, id) {
+            this.svg = $(svgId);
+            this.viewbox = viewbox;
+            this.id = id;
+            this.create();
+        },
+
+        create() {
+            let svg1 = document.createElementNS(xlmns, 'svg');
+            svg1.setAttributeNS(null, 'id', this.id);
+            svg1.setAttributeNS(null, 'viewbox', this.viewbox);
+            svg1.setAttributeNS(null, 'height', '100%');
+            svg1.setAttributeNS(null, 'width', '100%');
+            this.svg.appendChild(svg1);
+        },
+
+        rect(x, y, w, h, fill) {
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.fill = fill;
+            this.drawRect();
+        },
+
+        drawRect() {
+            var svg = document.getElementById(this.id);
+            let r = document.createElementNS(xlmns, 'rect');
+            r.setAttributeNS(null, 'x', this.x);
+            r.setAttributeNS(null, 'y', this.y);
+            r.setAttributeNS(null, 'height', this.h);
+            r.setAttributeNS(null, 'width', this.w);
+            r.setAttributeNS(null, 'fill', this.fill);
+            svg.appendChild(r);
+        },
+
+        polygon(stroke, fill) {
+            this.points = '50 160 55 180 70 180 60 190 65 205 50 195 35 205 40 190 30 180 45 180';
+            this.stroke = stroke;
+            this.fill = fill;
+        }, 
+        
+        drawPolygon() {
+            var svg = document.getElementById(this.id);
+            let p = document.createElementNS(xlmns, 'polygon');
+            p.setAttributeNS(null, 'points', this.points);
+            p.setAttributeNS(null, 'stroke', this.stroke);
+            p.setAttributeNS(null, 'fill', this.fill);
+            svg.appendChild(p);
+        }
+
+    };
+
+    let initialize = function () {
+        let svg = Object.create(SVG);
+        svg.init('svg', '0 0 500 260', 'svg0');
+
+        svg.rect('0', '0', '220', '140', '#002868');
+        svg.rect('220', '0', '280', '20', '#bf0a30');
+        svg.rect('220', '40', '280', '20', '#bf0a30');
+        svg.rect('220', '80', '280', '20', '#bf0a30');
+        svg.rect('220', '120', '280', '20', '#bf0a30');
+        svg.rect('0', '160', '500', '20', '#bf0a30');
+        svg.rect('0', '200', '500', '20', '#bf0a30');
+        svg.rect('0', '240', '500', '20', '#bf0a30');
+
+        svg.polygon();
+    };
+
+    window.addEventListener('load', initialize);
+    </script>
+</body>
+</html>

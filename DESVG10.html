@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SVG objekter</title>
+</head>
+<body>
+    <style>
+    #svg {
+        border: 1px solid black;
+        width: 500px;
+        height: 300px;
+    }
+
+    </style>
+
+<div id="svg"></div>
+
+<script>
+"use strict";
+var $ = function (foo) {
+    return document.getElementById(foo);
+};
+
+let xlmns = 'http://www.w3.org/2000/svg';
+
+let SVG = {
+    init(svgId, viewbox, id) {
+        this.svg = $(svgId);
+        this.viewbox = viewbox;
+        this.id = id;
+        this.create();
+    },
+    
+    create() {
+        let svg1 = document.createElementNS(xlmns, 'svg');
+        svg1.setAttributeNS(null, 'id', this.id);
+        svg1.setAttributeNS(null, 'viewbox', this.viewbox);
+        svg1.setAttributeNS(null, 'height', '100%');
+        svg1.setAttributeNS(null, 'width', '100%');
+        this.svg.appendChild(svg1);
+    }, 
+
+    rect(x, y, w, h, fill) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.fill = fill;
+        this.drawRect();
+    },
+
+    drawRect() {
+        var svg = document.getElementById(this.id);
+        let r = document.createElementNS(xlmns, 'rect');
+        r.setAttributeNS(null, 'x', this.x);
+        r.setAttributeNS(null, 'y', this.y);
+        r.setAttributeNS(null, 'height', this.h);
+        r.setAttributeNS(null, 'width', this.w);
+        r.setAttributeNS(null, 'fill', this.fill);
+        svg.appendChild(r);
+    }, 
+
+    circle(cx, cy, r, fill) {
+        this.x = cx;
+        this.y = cy;
+        this.r = r;
+        this.fill = fill;
+        this.drawCircle();
+    }, 
+
+    drawCircle() {
+        var svg = document.getElementById(this.id);
+        let c = document.createElementNS(xlmns, 'circle');
+        c.setAttributeNS(null, 'cx', this.x);
+        c.setAttributeNS(null, 'cy', this.y);
+        c.setAttributeNS(null, 'r', this.r);
+        c.setAttributeNS(null, 'fill', this.fill);
+        svg.appendChild(c);
+    }, 
+
+    ellipse(cx, cy, rx, ry, fill) {
+        this.x = cx;
+        this.y = cy;
+        this.rx = rx;
+        this.ry = ry;
+        this.fill = fill;
+        this.drawEllipse();
+    },
+
+    drawEllipse() {
+        var svg = document.getElementById(this.id);
+        let e = document.createElementNS(xlmns, 'ellipse');
+        e.setAttributeNS(null, 'cx', this.x);
+        e.setAttributeNS(null, 'cy', this.y);
+        e.setAttributeNS(null, 'rx', this.rx);
+        e.setAttributeNS(null, 'ry', this.ry);
+        e.setAttributeNS(null, 'fill', this.fill);
+        svg.appendChild(e);  
+    }  
+};
+
+let initialize = function () {
+    let svg = Object.create(SVG);
+    svg.init('svg', '0 0 500 300', 'svg0');
+
+    svg.rect('10', '10', '100', '100', 'blue');
+    svg.rect('120', '10', '100', '50', 'green');
+    svg.circle('280', '60', '50', 'red');
+    svg.ellipse('110', '200', '100', '40', 'yellow');
+
+};
+
+window.addEventListener('load', initialize);
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flag of Denmark</title>
+</head>
+<body>
+    <style>
+    #svg {
+        border: 1px solid #cfcfcf;
+        width: 500px;
+        height: 300px;
+    }
+    </style>
+
+    <div id="svg"></div>
+
+    <script>
+    "use strict";
+    var $ = function (foo) {
+        return document.getElementById(foo);
+    };
+
+    let xlmns = 'http://www.w3.org/2000/svg';
+
+    let SVG = {
+        init(svgId, viewbox, id) {
+            this.svg = $(svgId);
+            this.viewbox = viewbox;
+            this.id = id;
+            this.create();
+        },
+
+        create() {
+            let svg1 = document.createElementNS(xlmns, 'svg');
+            svg1.setAttributeNS(null, 'id', this.id);
+            svg1.setAttributeNS(null, 'viewbox', this.viewbox);
+            svg1.setAttributeNS(null, 'height', '100%');
+            svg1.setAttributeNS(null, 'width', '100%');
+            this.svg.appendChild(svg1);
+        },
+
+        rect(x, y, w, h, fill) {
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.fill = fill;
+            this.drawRect();
+        },
+
+        drawRect() {
+            var svg = document.getElementById(this.id);
+            let r = document.createElementNS(xlmns, 'rect');
+            r.setAttributeNS(null, 'x', this.x);
+            r.setAttributeNS(null, 'y', this.y);
+            r.setAttributeNS(null, 'height', this.h);
+            r.setAttributeNS(null, 'width', this.w);
+            r.setAttributeNS(null, 'fill', this.fill);
+            svg.appendChild(r);
+        }
+    };
+
+    let initialize = function () {
+        let svg = Object.create(SVG);
+        svg.init('svg', 'o o 500 300', 'svg0');
+
+        svg.rect('0', '0', '170', '130', 'red');
+        svg.rect('0', '170', '170', '130', 'red');
+        svg.rect('210', '0', '290', '130', 'red');
+        svg.rect('210', '170', '290', '130', 'red');
+    };
+
+    window.addEventListener('load', initialize);
+    </script>
+</body>
+</html>

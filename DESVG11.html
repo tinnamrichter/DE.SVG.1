@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flag of Greenland</title>
+</head>
+<body>
+    <style>
+    #svg {
+        border: 1px solid #cfcfcf;
+        width: 500px;
+        height: 330px;
+    }
+
+    </style>
+
+    <div id="svg"></div>
+
+    <script>
+    "use strict";
+    var $ = function (foo) {
+        return document.getElementById(foo);
+    };
+
+    let xlmns = 'http://www.w3.org/2000/svg';
+
+    let SVG = {
+        init(svgId, viewbox, id) {
+            this.svg = $(svgId);
+            this.viewbox = viewbox;
+            this.id = id;
+            this.create();
+        },
+
+        create() {
+            let svg1 = document.createElementNS(xlmns, 'svg');
+            svg1.setAttributeNS(null, 'id', this.id);
+            svg1.setAttributeNS(null, 'viewbox', this.viewbox);
+            svg1.setAttributeNS(null, 'height', '100%');
+            svg1.setAttributeNS(null, 'width', '100%');
+            this.svg.appendChild(svg1);
+        },
+
+        rect(x, y, w, h, fill) {
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.fill = fill;
+            this.drawRect();
+        },
+
+        drawRect() {
+            var svg = document.getElementById(this.id);
+            let r = document.createElementNS(xlmns, 'rect');
+            r.setAttributeNS(null, 'x', this.x);
+            r.setAttributeNS(null, 'y', this.y);
+            r.setAttributeNS(null, 'height', this.h);
+            r.setAttributeNS(null, 'width', this.w);
+            r.setAttributeNS(null, 'fill', this.fill);
+            svg.appendChild(r);
+        },
+
+        path(d, fill) {
+            this.d = d;
+            this.fill = fill;
+            this.drawPath();
+        },
+
+        drawPath() {
+            var svg = document.getElementById(this.id);
+            let p = document.createElementNS(xlmns, 'path');
+            p.setAttributeNS(null, 'd', this.d);
+            p.setAttributeNS(null, 'fill', this.fill);
+            svg.appendChild(p);
+        }
+    };
+
+    let initialize = function () {
+        let svg = Object.create(SVG);
+        svg.init('svg', '0 0 500 330', 'svg0');
+        svg.rect('0', '172', '500', '158', '#D10330');
+        svg.path('M80,172 a1,1 0 0,1 227,0', '#D10330');
+        svg.path('M80,172 a1,1 0 0,0 227,0', 'white');
+    };
+
+    window.addEventListener('load', initialize);
+    </script>
+</body>
+</html>
